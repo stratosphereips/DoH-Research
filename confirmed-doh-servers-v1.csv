@@ -1,0 +1,29 @@
+IP;H1JSON;H2JSON;H1GET;H2GET;H1POST;H2POST
+45.90.30.3,True,True,True,True,True,True,('dns2.nextdns.io', '0')
+45.90.30.227,True,True,True,True,True,True,('dns2.nextdns.io', '0')
+45.90.30.3,True,True,True,True,True,True,('dns2.nextdns.io', '0')
+45.90.30.80,True,True,True,True,True,True,('dns2.nextdns.io', '0')
+45.90.30.60,True,True,True,True,True,True,('dns2.nextdns.io', '0')
+45.90.29.128,True,True,True,True,True,True,('45.90.29.128', '0')
+45.90.29.223,True,True,True,True,True,True,('45.90.29.223', '0')
+45.90.28.84,True,True,True,True,True,True,('dns1.nextdns.io', '0')
+45.90.28.106,True,True,True,True,True,True,('dns1.nextdns.io', '0')
+45.90.28.208,True,True,True,True,True,True,('dns1.nextdns.io', '0')
+63.34.235.238,False,False,True,True,False,False,('ec2-63-34-235-238.eu-west-1.compute.amazonaws.com', '0')
+104.225.11.200,False,False,True,True,True,True,('dns2-iad.securd.com', '0')
+169.48.27.179,False,False,True,True,True,True,('b3.1b.30a9.ip4.static.sl-reverse.com', '0')
+144.202.79.26,True,False,True,False,True,False,('144.202.79.26.vultr.com', '0')
+68.118.143.26,False,False,True,True,True,True,('068-118-143-026.res.spectrum.com', '0')
+45.77.154.135,False,False,True,True,True,True,('45.77.154.135.vultr.com', '0')
+172.81.108.144,False,False,False,True,False,True,('172.81.108.144', '0')
+159.203.35.192,False,False,True,True,True,True,('cv-dns-on-ca-1.cloudveil.org', '0')
+
+to try
+Nmap scan report for 47.103.166.53
+Nmap scan report for 34.82.126.118
+Nmap scan report for 3.121.138.96
+Nmap scan report for 45.90.28.199
+Nmap scan report for 45.90.30.113
+Nmap scan report for 45.90.28.249
+Nmap scan report for 52.50.158.119
+
