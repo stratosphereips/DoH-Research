@@ -1,0 +1,12 @@
+--- h2_stream.lua.orig	2021-03-18 15:17:08.224119665 +0100
++++ h2_stream.lua	2021-03-18 15:16:47.230613569 +0100
+@@ -1218,6 +1218,9 @@
+ 		if self.state == "closed" then
+ 			return nil, self.rst_stream_error
+ 		end
++		if timeout < 0 then
++			return nil, ce.strerror(ce.ETIMEDOUT), ce.ETIMEDOUT
++		end
+ 		local which = cqueues.poll(self.recv_headers_cond, self.connection, timeout)
+ 		if which == self.connection then
+ 			local ok, err, errno = self.connection:step(0)
