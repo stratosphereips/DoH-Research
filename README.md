@@ -1,10 +1,11 @@
-# DoH Research files and scripts
-This repository is related to a reserach on the adoption of Encrypted DNS technologies, in particular DoH.
+# DoH Research Scripts for CVUT/CESNET/AVAST DoH Project
+This repository is related to a reserach on the adoption of DoH technologies.
 It has been done by researchers from the Czech Technical University in Prague (FIT[1] and FEL faculties[2]), CESNET[3] and Avast Software[4].
 
 This repository holds:
-- A dataset of well-known and verified DoH providers as they are advertised on the Internet. This is the first comprehensive list of DoH providers that include all other lists.
-- A dataset on DoH servers around the world found by an Internet scan of their ports and verification with a novel Nmap NSE script. These are mostly still _unknown_ DoH servers that the public is setting up and most are not published yet.
+- "DoH Internet Servers Dataset.csv": A dataset of well-known and verified DoH providers as they were found in lists on the Internet. This is the first comprehensive list of DoH providers well-known to the community that include all other lists (In April 2021).
+- "list-of-doh-servers-internet-April-2021.csv": A dataset on DoH servers found by an Internet scan of their port 443/TCP and a verification with a novel Nmap NSE script. These are mostly still _unknown_ DoH servers for the community that the public is setting up.
+- "nmap-script": A folder with our novel Nmap NSE script to scan and verify DoH servers with six different techniques.
 
 The dataset of well-known DoH providers is in the file ```DoH Internet Servers Dataset.csv```. Its columsn are: 
 
@@ -15,7 +16,7 @@ The dataset of well-known DoH providers is in the file ```DoH Internet Servers D
     Domain Name 4: Domain associated with the IP
     ASN: ASN associated with the IP
 
-The dataset of DoH servers found around the world is in the file ```list-of-doh-servers-internet.csv```. Its columns are:
+The dataset of DoH servers found around the world is in the file ```list-of-doh-servers-internet-April-2021.csv```. Its columns are:
 
     IP: IP address of the DoH server
     HTTP1-JSON: If it supports HTTP/1 in JSON format.
