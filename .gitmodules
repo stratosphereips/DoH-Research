@@ -1,0 +1,6 @@
+[submodule "esnicheck"]
+	path = validation-script/esnicheck
+	url = https://github.com/azadi/esnicheck.git
+[submodule "validation-script/esnicheck"]
+	path = validation-script/esnicheck
+	url = https://github.com/azadi/esnicheck.git
