@@ -7,7 +7,7 @@ This repository holds:
 - "list-of-doh-servers-internet-April-2021.csv": A dataset on DoH servers found by an Internet scan of their port 443/TCP and a verification with a novel Nmap NSE script. These are mostly still _unknown_ DoH servers for the community that the public is setting up.
 - "nmap-script": A folder with our novel Nmap NSE script to scan and verify DoH servers with six different techniques.
 
-The dataset of well-known DoH providers is in the file ```DoH Internet Servers Dataset.csv```. Its columsn are: 
+The dataset of well-known DoH providers is in the file ```DoH Internet Servers Dataset.csv```. Its columsn are:
 
     IP Address: IP address of the DoH server
     Domain Name 1: Domain associated with the IP
@@ -31,6 +31,7 @@ The dataset of DoH servers found around the world is in the file ```list-of-doh-
 
 
 The NMAP NSE script can be found in the folder ```nmap-script```.
+The python script used for NMAP NSE result validation can be found in the folder ```validation-script```
 
 The authors of this work are:
 - Sebastián García, garciseb@fel.cvut.cz
@@ -43,4 +44,3 @@ The authors of this work are:
 [2] https://fel.cvut.cz/
 [3] https://www.cesnet.cz/
 [4] https://www.avast.com/
-
