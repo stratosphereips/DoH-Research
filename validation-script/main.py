@@ -154,6 +154,7 @@ class dohChecker:
 
 
 def checkDoh(ip):
+    ip = ip.strip()
     checker = dohChecker()
     asndb = pyasn.pyasn('ipasn011021.dat')
     try:
