@@ -5,6 +5,7 @@ import csv
 import argparse
 from datetime import datetime
 import whois
+import time
 
 def restricted_generalized_time_to_datetime(string):
     if string[-1] != 'Z':
@@ -33,14 +34,19 @@ def getCertInfo(ip):
     for data in [x509.get_issuer().get_components(),x509.get_subject().get_components()] :
         for i in data:
             result["CRT_" + i[0].decode("latin-1")] = i[1].decode("latin-1")
-    whois_dict = whois.whois(result["CRT_" + "CN"].replace("*.", ""))
+
+    whoisDomain = result["CRT_" + "CN"].replace("*.", "")
+    try:
+        whois_dict = whois.whois(whoisDomain)
+        for key in whois_dict.keys():
+            result["WHOIS_" + key] = whois_dict[key]
+    except:
+        print("WhoisProblem {}, {}", ip, whoisDomain)
+
 
     result["CRT_" + "NOT_AFTER"] = restricted_generalized_time_to_datetime(x509.get_notAfter().decode("latin-1")).strftime("%Y-%m-%d")
     result["CRT_" + "NOT_BEFORE"] = restricted_generalized_time_to_datetime(x509.get_notBefore().decode("latin-1")).strftime("%Y-%m-%d")
     result["CRT_" + "EXPIRED"] = x509.has_expired()
-
-    for key in whois_dict.keys():
-        result["WHOIS_" + key] = whois_dict[key]
 
     return result
 
@@ -61,6 +67,7 @@ for row in input_file:
         dict_array.append(certDict)
         for i in certDict.keys():
             fields_set.add(i);
+            time.sleep(0.2)
 fields = list(fields_set)
 fields.sort();
 writer = csv.DictWriter(args.ofile, fieldnames=fields)
