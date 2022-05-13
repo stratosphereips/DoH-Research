@@ -13,6 +13,13 @@ from esnicheck.esnicheck.check import ESNICheck
 
 from func_timeout import FunctionTimedOut, func_set_timeout
 from joblib import Parallel, delayed
+from multiprocessing import Process, Lock
+
+shared_list = list();
+asndb = pyasn.pyasn('ipasn011021.dat')
+gcounter = 0;
+lock = Lock()
+
 
 timeout = 60
 class dohChecker:
@@ -156,7 +163,7 @@ class dohChecker:
 def checkDoh(ip):
     ip = ip.strip()
     checker = dohChecker()
-    asndb = pyasn.pyasn('ipasn011021.dat')
+    global asndb;
     try:
         jsonh1status = checker.testJsonH1(ip)
         jsonh2status = checker.testJsonH2(ip)
@@ -186,19 +193,31 @@ def checkDoh(ip):
             hasESNI = "False";
             hasTLS13 = "False";
 
-
-        print(str(ip) + "," + str(jsonh1status) + "," + str(jsonh2status) + "," + str(geth1status) + "," + str(
+        lock.acquire()
+        global gcounter
+        gcounter = gcounter + 1;
+        print(gcounter)
+        shared_list.append(str(ip) + "," + str(jsonh1status) + "," + str(jsonh2status) + "," + str(geth1status) + "," + str(
             geth2status) + "," + str(posth1status) + "," + str(posth2status) + "," + str(url) + "," + str(hasESNI) + "," + str(hasTLS13) + "," + str(asn))
-
+        lock.release();
 
 """
 Main
 """
 
-parser = argparse.ArgumentParser(description='Check DNS over HTTPS resolvers')
-parser.add_argument('-f','--file', type=argparse.FileType('r'), help='File with IP addresses', required=True)
-parser.add_argument('-j','--jobs', type=int, help='Number of parallel requests', required=False, default=25)
-args = parser.parse_args()
+#parser = argparse.ArgumentParser(description='Check DNS over HTTPS resolvers')
+#parser.add_argument('-f','--file', type=argparse.FileType('r'), help='File with IP addresses', required=True)
+#parser.add_argument('-j','--jobs', type=int, help='Number of parallel requests', required=False, default=25)
+#args = parser.parse_args()
 
-print("IP,jsonH1,jsonH2,getH1,getH2,postH1,postH2,hostname,ESNIsupport,TLS13support, asn")
-element_information = Parallel(n_jobs=args.jobs, prefer="threads")(delayed(checkDoh)(line.rstrip("\n")) for line in args.file)
+#f = open("result.txt", 'w');
+#f.write("IP,jsonH1,jsonH2,getH1,getH2,postH1,postH2,hostname,ESNIsupport,TLS13support, asn\n")
+#element_information = Parallel(n_jobs=args.jobs, prefer="threads", require='sharedmem')(delayed(checkDoh)(line.rstrip("\n")) for line in args.file)
+
+checkDoh("203.180.146.24")
+print(shared_list)
+
+#for i in shared_list:
+#    f.write(i + '\n');
+
+#f.close();
