@@ -7,6 +7,7 @@ from datetime import datetime
 import whois
 import time
 
+cnt = 0;
 def restricted_generalized_time_to_datetime(string):
     if string[-1] != 'Z':
         return ValueError
@@ -23,6 +24,7 @@ def restricted_generalized_time_to_datetime(string):
 
 
 def getCertInfo(ip):
+    global cnt
     try:
         cert = ssl.get_server_certificate((ip, 443))
     except:
@@ -33,8 +35,10 @@ def getCertInfo(ip):
     result["IP"] = ip
     for data in [x509.get_issuer().get_components(),x509.get_subject().get_components()] :
         for i in data:
-            result["CRT_" + i[0].decode("latin-1")] = i[1].decode("latin-1")
-
+            try:
+                result["CRT_" + i[0].decode("UTF-8")] = i[1].decode("UTF-8")
+            except:
+                continue;
     whoisDomain = result["CRT_" + "CN"].replace("*.", "")
     try:
         whois_dict = whois.whois(whoisDomain)
@@ -47,7 +51,8 @@ def getCertInfo(ip):
     result["CRT_" + "NOT_AFTER"] = restricted_generalized_time_to_datetime(x509.get_notAfter().decode("latin-1")).strftime("%Y-%m-%d")
     result["CRT_" + "NOT_BEFORE"] = restricted_generalized_time_to_datetime(x509.get_notBefore().decode("latin-1")).strftime("%Y-%m-%d")
     result["CRT_" + "EXPIRED"] = x509.has_expired()
-
+    cnt = cnt+1;
+    print(cnt)
     return result
 
 
@@ -74,5 +79,3 @@ writer = csv.DictWriter(args.ofile, fieldnames=fields)
 writer.writeheader()
 for i in dict_array:
     writer.writerow(i)
-
-
